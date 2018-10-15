@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # João Paulo F. Guimarães
 # joao.paulo.f.guimaraes@gmail.com || joao.guimaraes@ifrn.edu.br
 # Correntropy tests using python

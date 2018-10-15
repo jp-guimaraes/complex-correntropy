@@ -22,8 +22,7 @@ def mccc(x,d,sigma,w0):
     R_ = 1e-4*np.matrix(np.eye(wl))
     P_ = 1e-4*np.matrix(np.ones((wl,1)))
 
-    for x in range(N)
-        print(x)
+
 
    
     
