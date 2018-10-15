@@ -1,6 +1,6 @@
 # joao.paulo.f.guimaraes@gmail.com
 # Fixed point using the Maximum Correntropy Criteria
-# 05/10/2018
+# 10/04.2018
 import random
 import math
 import numpy as np

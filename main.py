@@ -2,7 +2,7 @@
 # João Paulo F. Guimarães
 # joao.paulo.f.guimaraes@gmail.com || joao.guimaraes@ifrn.edu.br
 # Correntropy tests using python
-# 02.10.2018
+# 10.02.2018
 
 from pylab import *
 import numpy as np
