@@ -14,11 +14,11 @@ from mccc import mccc
 
 # meta - input data
 # number of samples
-input_length = 10; mu = 5; sigma = 10
+input_length = 300; mu = 0; sigma = 1
 
 
 # filter weights
-w = np.matrix('1;2'); w_t = w.transpose()
+w = np.matrix('1.2345;2.6789'); w_t = w.transpose()
 
 nlw,ncw = w.shape
 
@@ -33,19 +33,22 @@ y = matmul(w_t,x)
 
 
 # noise data
-mu1 = 0; mu2 = 30
-sigma1 = 5; sigma2 = 1
+mu1 = 0; mu2 = 10
+sigma1 = 0.05; sigma2 = 5
 
 # adding additive noise to the output
-noise = bimodal(0.9,mu1,sigma1,mu2,sigma2,input_length)
+noise = bimodal(0.90,mu1,sigma1,mu2,sigma2,input_length)
 
 # desired
 d = y + noise
 
 # using Maximum Correntropy Criteria MCCC to estimate w
-sigma = 1; w0 = np.zeros(w.shape);
+kernel_size = 0.5; w0 = np.zeros(w.shape)
 
-w_hat = mccc(x,d,sigma,w0);
+w_hat = mccc(x,d,kernel_size,w0)
+
+print(w_hat)
+
 
 # plotting routine
 

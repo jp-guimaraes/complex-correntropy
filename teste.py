@@ -3,18 +3,39 @@ import numpy as np
 
 
 
-#a = np.matrix([(1,2),(3,4)])
-a = np.arange(15).reshape(3, 5)
-
-print(a)
-print(a.shape)
+N = 10
+n =0
 
 
-aux = a[:,0]
-aux.reshape((3,1))
+while n<N:
+	print n
+	n = n+1
 
-print(aux)
-print(aux.shape)
+
+
+
+
+
+
+
+
+
+
+
+
+
+# #a = np.matrix([(1,2),(3,4)])
+# a = np.arange(15).reshape(3, 5)
+
+# print(a)
+# print(a.shape)
+
+
+# aux = a[:,0]
+# aux.reshape((3,1))
+
+# print(aux)
+# print(aux.shape)
 
 
 
