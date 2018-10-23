@@ -9,6 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from bimodal import bimodal
 from mccc import mccc
+from wsnr import wsnr
 
 
 
@@ -47,7 +48,7 @@ kernel_size = 0.5; w0 = np.zeros(w.shape)
 
 w_hat = mccc(x,d,kernel_size,w0)
 
-print(w_hat)
+h_wsnr = wsnr(w,w_hat); h_wsnr = np.transpose(h_wsnr)
 
 
 # plotting routine
@@ -57,8 +58,9 @@ print(w_hat)
 y_t = y.transpose(); d_t = d.transpose()
 
 
-fig = plt.figure()
-fig.suptitle('input data')
+
+fig1= plt.figure()
+fig1.suptitle('input data')
 
 plt.plot(y_t, 'o-',label = 'original signal')
 plt.plot(d_t, 'x--',label = 'noisy signal')
@@ -66,6 +68,16 @@ plt.grid(True)
 plt.legend()
 plt.xlabel('sample')
 plt.ylabel('amplitude')
+
+
+fig2 = plt.figure()
+plt.plot(h_wsnr,label = ['MCCC with kernel size', kernel_size])
+plt.grid(True)
+plt.legend()
+plt.xlabel('sample')
+plt.ylabel('WSNR')
+
+
 plt.show()
 
 

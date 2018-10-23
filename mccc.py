@@ -59,5 +59,5 @@ def mccc(x,d,sigma,w0):
 
    
     
-    return w
+    return h_w
         
