@@ -52,7 +52,9 @@ def mccc(x,d,sigma,w0):
         # old R and P updated with the new values
         R_ = R; P_ = P
 
-        h_w[:,n] = w;
+        # updating the log variable
+        if(n!=0):
+            h_w[:,n] = w;
 
         n = n+1
 

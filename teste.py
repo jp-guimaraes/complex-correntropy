@@ -2,23 +2,10 @@ import numpy as np
    
 
 
+a = 3
 
-N = 10
-n =0
-
-
-while n<N:
-	print n
-	n = n+1
-
-
-
-
-
-
-
-
-
+if(a!=2):
+	print('teste')
 
 
 
