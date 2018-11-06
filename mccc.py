@@ -14,7 +14,8 @@ def mccc(x,d,sigma,w0):
     wl,wc = w.shape
 
     # record the estimated w at each step
-    h_w = np.matrix(np.zeros((wl,N)))
+    aux = np.zeros((wl,N)) + 1j*np.zeros((wl,N));
+    h_w = np.matrix(aux)
     h_w[:,0] = w0
 
 
@@ -41,6 +42,9 @@ def mccc(x,d,sigma,w0):
         
         # exponential part
         B = -0.5*(e*e_c)/(math.pow(sigma,2))
+
+        # bug: exp of complex = error, but e*e_c always real, i.e. [1+0j]
+        B = np.real(B);
         expB = math.exp(B)       
         
             

@@ -7,7 +7,7 @@ import numpy as np
 
 def wsnr(w,w_hat):
 
-    w_t = np.transpose(w)
+    w_t = np.transpose(w); w_h = np.conjugate(w_t)
 
     (p,N) = w_hat.shape
 
@@ -17,7 +17,10 @@ def wsnr(w,w_hat):
         e = w-w_hat[:,c]
         e_c = np.conjugate(e)
         e_h = np.transpose(e_c)
-        log_wsnr[:,c] = 10*log10((w_t.dot(w))/(e_h.dot(e)))
+        # bug: w^h*w, e^h *e always real, i.e. [1+0j]
+        a = np.real(w_h.dot(w))
+        b = np.real(e_h.dot(e))
+        log_wsnr[:,c] = 10*log10(a/b)
 
         c = c+1
 
