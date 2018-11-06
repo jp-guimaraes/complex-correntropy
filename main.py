@@ -11,43 +11,47 @@ from bimodal import bimodal
 from mccc import mccc
 from wsnr import wsnr
 
-
-
 # meta - input data
-# number of samples
-input_length = 300; mu = 0; sigma = 1
-
 
 # filter weights
 w1 = 1+2j; w2 = -3+4j;
 w = np.matrix([ [w1], [w2]] ); w_t = w.transpose(); w_h = w_t.conjugate();
-
-
-
 nlw,ncw = w.shape
 
 
 
+# number of samples; mean and var from the input data
+input_length = 300; mu = 0; sigma = 1
+
 # defining the input variable x
-x = np.random.normal(mu,sigma,(nlw,input_length))
+x = np.random.normal(mu,sigma,(nlw,input_length)) + 1j*np.random.normal(mu,sigma,(nlw,input_length))
 
 
 # generating clean output
 y = matmul(w_h,x)
 
 
-# noise data
+# noise data real part
 mu1 = 0; mu2 = 10
 sigma1 = 0.05; sigma2 = 5
 
 # adding additive noise to the output
-# noise = bimodal(0.90,mu1,sigma1,mu2,sigma2,input_length)
+real_noise = bimodal(0.95,mu1,sigma1,mu2,sigma2,input_length)
+
+
+# noise data imaginary part
+mu1 = 0; mu2 = 1
+sigma1 = 0.05; sigma2 =25
+
+
+imag_noise = bimodal(0.95,mu1,sigma1,mu2,sigma2,input_length)
+noise = real_noise + 1j*imag_noise;
 
 # desired
-d = y #+ noise
+d = y + noise
 
 # using Maximum Correntropy Criteria MCCC to estimate w
-kernel_size = 0.5; w0 = np.zeros(w.shape)
+kernel_size = 1; w0 = np.zeros(w.shape)
 
 w_hat = mccc(x,d,kernel_size,w0)
 
@@ -59,23 +63,34 @@ h_wsnr = wsnr(w,w_hat); h_wsnr = np.transpose(h_wsnr)
 # plotting routine
 
 
-# tranposing results
+# tranposing results (just for visualization)
 y_t = y.transpose(); d_t = d.transpose()
 
 
 
 fig1= plt.figure()
-fig1.suptitle('input data')
+fig1.suptitle('input data: real part')
+plt.plot(real(y_t), 'o-',label = 'original signal - real part')
+plt.plot(real(d_t), 'x--',label = 'noisy signal - real part')
 
-plt.plot(y_t, 'o-',label = 'original signal')
-plt.plot(d_t, 'x--',label = 'noisy signal')
 plt.grid(True)
 plt.legend()
 plt.xlabel('sample')
 plt.ylabel('amplitude')
 
 
-fig2 = plt.figure()
+fig2= plt.figure()
+fig2.suptitle('input data: imaginary part')
+plt.plot(imag(y_t), 'o-',label = 'original signal - imaginary part')
+plt.plot(imag(d_t), 'x--',label = 'noisy signal - imaginary part')
+
+plt.grid(True)
+plt.legend()
+plt.xlabel('sample')
+plt.ylabel('amplitude')
+
+
+fig3 = plt.figure()
 plt.plot(h_wsnr,label = ['MCCC with kernel size', kernel_size])
 plt.grid(True)
 plt.legend()
