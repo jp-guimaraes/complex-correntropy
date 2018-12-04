@@ -4,7 +4,9 @@
 # Correntropy tests using python
 # 10.02.2018
 
+
 from pylab import *
+import math
 import numpy as np
 import matplotlib.pyplot as plt
 from bimodal import bimodal
@@ -15,13 +17,17 @@ from wsnr import wsnr
 
 # filter weights
 w1 = 1+2j; w2 = -3+4j;
+
+
 w = np.matrix([ [w1], [w2]] ); w_t = w.transpose(); w_h = w_t.conjugate();
 nlw,ncw = w.shape
-
+print('Right values:')
+print(w1)
+print(w2)
 
 
 # number of samples; mean and var from the input data
-input_length = 300; mu = 0; sigma = 1
+input_length = 500; mu = 0; sigma = 1
 
 # defining the input variable x
 x = np.random.normal(mu,sigma,(nlw,input_length)) + 1j*np.random.normal(mu,sigma,(nlw,input_length))
@@ -44,7 +50,7 @@ mu1 = 0; mu2 = 1
 sigma1 = 0.05; sigma2 =25
 
 
-imag_noise = bimodal(0.95,mu1,sigma1,mu2,sigma2,input_length)
+imag_noise = bimodal(0.90,mu1,sigma1,mu2,sigma2,input_length)
 noise = real_noise + 1j*imag_noise;
 
 # desired
@@ -55,6 +61,7 @@ kernel_size = 1; w0 = np.zeros(w.shape)
 
 w_hat = mccc(x,d,kernel_size,w0)
 
+print('Estimated values: ')
 print(w_hat[:,-1])
 
 h_wsnr = wsnr(w,w_hat); h_wsnr = np.transpose(h_wsnr)
