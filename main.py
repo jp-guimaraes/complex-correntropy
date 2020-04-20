@@ -1,16 +1,18 @@
-# -*- coding: utf-8 -*-
 # João Paulo F. Guimarães
 # joao.paulo.f.guimaraes@gmail.com || joao.guimaraes@ifrn.edu.br
 # Correntropy tests using python
-# 10.02.2018
 
 
-from pylab import *
+# from pylab import *
 import numpy as np
 import matplotlib.pyplot as plt
-from bimodal import bimodal
+# from bimodal import bimodal
 from mccc import mccc
 from wsnr import wsnr
+from bimodal import bimodal
+
+# seed
+np.random.seed(seed=1)
 
 # meta - input data
 
@@ -33,7 +35,7 @@ x = np.random.normal(mu,sigma,(nlw,input_length)) + 1j*np.random.normal(mu,sigma
 
 
 # generating clean output
-y = matmul(w_h,x)
+y = np.matmul(w_h,x)
 
 
 # noise data real part
@@ -73,11 +75,10 @@ h_wsnr = wsnr(w,w_hat); h_wsnr = np.transpose(h_wsnr)
 y_t = y.transpose(); d_t = d.transpose()
 
 
-
 fig1= plt.figure()
 fig1.suptitle('input data: real part')
-plt.plot(real(y_t), 'o-',label = 'original signal - real part')
-plt.plot(real(d_t), 'x--',label = 'noisy signal - real part')
+plt.plot(np.real(y_t), 'o-',label = 'original signal - real part')
+plt.plot(np.real(d_t), 'x--',label = 'noisy signal - real part')
 
 plt.grid(True)
 plt.legend()
@@ -87,8 +88,8 @@ plt.ylabel('amplitude')
 
 fig2= plt.figure()
 fig2.suptitle('input data: imaginary part')
-plt.plot(imag(y_t), 'o-',label = 'original signal - imaginary part')
-plt.plot(imag(d_t), 'x--',label = 'noisy signal - imaginary part')
+plt.plot(np.imag(y_t), 'o-',label = 'original signal - imaginary part')
+plt.plot(np.imag(d_t), 'x--',label = 'noisy signal - imaginary part')
 
 plt.grid(True)
 plt.legend()
@@ -105,7 +106,6 @@ plt.ylabel('WSNR')
 
 
 plt.show()
-
 
 
 
