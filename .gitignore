@@ -3,6 +3,7 @@ __pycache__/
 
 # ignoring virtual environment 
 .venv/
+virtual_env/
 
 # ignoring vscode stuff
 .vscode/

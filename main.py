@@ -17,10 +17,10 @@ np.random.seed(seed=1)
 # meta - input data
 
 # filter weights
-w1 = 1+2j; w2 = -3+4j;
+w1 = 1+2j; w2 = -3+4j
 
 
-w = np.matrix([ [w1], [w2]] ); w_t = w.transpose(); w_h = w_t.conjugate();
+w = np.matrix([ [w1], [w2]] ); w_t = w.transpose(); w_h = w_t.conjugate()
 nlw,ncw = w.shape
 print('Right values:')
 print(w1)
@@ -52,7 +52,7 @@ sigma1 = 0.05; sigma2 =25
 
 
 imag_noise = bimodal(0.90,mu1,sigma1,mu2,sigma2,input_length)
-noise = real_noise + 1j*imag_noise;
+noise = real_noise + 1j*imag_noise
 
 # desired
 d = y + noise
